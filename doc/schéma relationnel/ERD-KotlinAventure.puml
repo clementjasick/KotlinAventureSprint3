@@ -1,0 +1,81 @@
+@startuml
+' ---------------------------------------------------------
+' DIAGRAMME Entité-Relation partiel de la BD KotlinAventure
+' ---------------------------------------------------------
+
+' ------------------------
+' Définition des entités :
+' ------------------------
+
+entity "**Arme**" as Arme #indianRed {
+  *<<PK>> **id :** INT
+  --
+  **nom :** VARCHAR(255)
+  **description :** VARCHAR(255)
+  --
+  <<FK>> **id_qualite :** INT
+  <<FK>> **id_type :** INT
+}
+
+entity "**TypeArme**" as TypeArme #LightCoral {
+  *<<PK>> **id :** INT
+  --
+  **nom :** VARCHAR(255)
+  **nombreDes :** INT
+  **valeurDeMax :** INT
+  **multiplicateurCritique :** INT
+  **activationCritique :** INT
+}
+
+entity "**Armure**" as Armure #SteelBlue {
+  *<<PK>> id : INT
+  --
+  **nom :** VARCHAR(255)
+  **description :** VARCHAR(255)
+  <<FK>> **id_qualite :** INT
+  <<FK>>**id_type :** INT
+}
+
+entity "**TypeArmure**" as TypeArmure #LightSteelBlue {
+  *<<PK>> id : INT
+  --
+  nom : VARCHAR(255)
+  bonusType : INT
+}
+
+entity "**Qualite**" as Qualite #Orange {
+  *<<PK>> id : INT
+  --
+  **nom :** VARCHAR(255)
+  **bonusRarete :** INT
+  **couleur :** VARCHAR(50)
+}
+
+entity "**Potion**" as Potion #Aquamarine {
+  *<<PK>> id : INT
+  --
+  **nom :** VARCHAR(255)
+  **description :** VARCHAR(255)
+  **soin :** INT
+}
+
+entity "**Bombe**" as Bombe #Violet {
+  *<<PK>> **id :** INT
+  --
+  **nom :** VARCHAR(255)
+  **description :** VARCHAR(255)
+  **nombreDeDes :** INT
+  **maxDe :** INT
+}
+
+
+' --------------------------
+' Définition des relations :
+' --------------------------
+
+Arme }--|| TypeArme : FK (id_type)
+Arme }--|| Qualite : FK (id_qualite)
+Armure }--|| TypeArmure : FK (id_type)
+Armure }--|| Qualite : FK (id_qualite)
+
+@enduml

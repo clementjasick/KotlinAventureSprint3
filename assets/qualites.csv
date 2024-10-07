@@ -1,0 +1,5 @@
+nom;bonusRarete;couleur
+commun;0;ANSI_GREEN
+rare;1;ANSI_BLUE
+epic;2;ANSI_PURPLE
+legendaire;3;ANSI_YELLOW

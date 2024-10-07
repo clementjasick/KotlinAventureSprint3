@@ -1,0 +1,5 @@
+nom;nombreDes;valeurDeMax;multiplicateurCritique;activationCritique
+"Epee longue";1;8;2;20
+"Epee courte";1;6;2;18
+"Lance";1;6;3;18
+"Marteau";1;8;2;200
