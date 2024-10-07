@@ -6,12 +6,15 @@ import model.item.*
 import model.personnage.Personnage
 import dao.QualiteDAO
 import generateur.GenerateurQualites
+import generateur.GenerateurTypeArmes
+import generateur.GenerateurArmes
 
 //DEMO MISSION 1
 val generateurQualites = GenerateurQualites("assets/qualites.csv")
 val qualites = generateurQualites.generer()
 
-
+val generateurTypeArmes = GenerateurTypeArmes("assets/typeArmes.csv")
+val typeArmes = generateurTypeArmes.generer()
 
 //DEMO MISSION 2 :
 // TODO Retirer les commentaires des lignes 21 et 24

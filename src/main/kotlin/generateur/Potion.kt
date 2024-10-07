@@ -1,0 +1,4 @@
+package generateur
+
+class Potion {
+}
