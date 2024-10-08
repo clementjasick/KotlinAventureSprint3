@@ -3,3 +3,4 @@ nom;description;type;qualite
 Lance;Une lance pointue;typeLance;rare
 Dague;Une dague extrêmement pointue;typeDague;epic
 Marteau;un marteau legendaire pourfendeur de troll;typeMarteau;legendaire
+Epee magique;Une arme magique;typeEpeeLongue;!!

@@ -1,0 +1,4 @@
+nom;pointDeVie;pointDeVieMax;attaque;defense;endurance;vitesse;armeEquipee;armureEquipee;inventaire
+Marvin le Kobold;25;25;3;4;6;12;dague;;potionDeSoin2,dague
+Antoine le gobelin;20;20;5;4;11;epee;;potionDeSoin3,epee
+Nassim le troll;100;100;6;3;12;3;marteau;;potionDeSoin4,marteau

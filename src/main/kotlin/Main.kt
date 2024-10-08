@@ -8,6 +8,10 @@ import dao.QualiteDAO
 import generateur.GenerateurQualites
 import generateur.GenerateurTypeArmes
 import generateur.GenerateurArmes
+import generateur.GenerateurArmures
+import generateur.GenerateurBombe
+import generateur.GenerateurPotion
+import generateur.GenerateurTypeArmures
 
 //DEMO MISSION 1
 val generateurQualites = GenerateurQualites("assets/qualites.csv")
@@ -16,6 +20,20 @@ val qualites = generateurQualites.generer()
 val generateurTypeArmes = GenerateurTypeArmes("assets/typeArmes.csv")
 val typeArmes = generateurTypeArmes.generer()
 
+val generateurArmes = GenerateurArmes("assets/armes.csv")
+val armes = generateurArmes.generer()
+
+val generateurTypeArmures = GenerateurTypeArmures("assets/typeArmures.csv")
+val typeArmures = generateurTypeArmures.generer()
+
+val generateurArmures = GenerateurArmures("assets/armure.csv")
+val armures = generateurArmures.generer()
+
+val generateurPotion = GenerateurPotion("assets/potion.csv")
+val potion = generateurPotion.generer()
+
+val generateurBombe = GenerateurBombe("assets/bombe.csv")
+val bombes = generateurBombe.generer()
 //DEMO MISSION 2 :
 // TODO Retirer les commentaires des lignes 21 et 24
 // TODO : A la ligne 13 renomé la variable qualites en qualitesFromCSV
@@ -76,7 +94,6 @@ val projectionAcide = Sort("Sort de projection acide", { caster, cible ->
 
 //instanciation des types d'armes
 val typeEpeeLongue = TypeArme("Epee longue", 1, 8, 2, 20)
-
 val typeEpeeCourte = TypeArme("Epee courte", 1, 6, 2, 18)
 val typeDague = TypeArme("Epee courte", 1, 4, 3, 15)
 val typeLance = TypeArme("Lance", 1, 6, 3, 18)
@@ -84,6 +101,7 @@ val typeMarteau = TypeArme("Marteau", 1, 8, 2, 20)
 
 //instanciation des types d'armures
 val typeArmureCuir = TypeArmure("Armure en cuir", 1)
+
 
 val sortInvocatinArme = Sort("Sort d'invocation d'arme magique") { caster, cible ->
     run {
@@ -134,6 +152,7 @@ fun main() {
     val potionDeSoin2 = Potion("Potion de Soin", "Restaure les points de vie", 20)
     val potionDeSoin3 = Potion("Potion de Soin", "Restaure les points de vie", 20)
     val potionDeSoin4 = Potion("Grande Potion de Soin", "Restaure les points de vie", 30)
+    val bombe = Bombe("Bombe","Ca fait BOOM",2,10)
 
     // Instanciation des Monstres
     val kobold =
