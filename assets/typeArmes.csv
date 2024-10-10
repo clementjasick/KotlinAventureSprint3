@@ -1,5 +1,6 @@
-nom;nombreDes;valeurDeMax;multiplicateurCritique;activationCritique
-Epee longue;1;8;2;20
-Epee courte;1;6;2;18
-Lance;1;6;3;18
-Marteau;1;8;2;200
+nom(String);nombreDes(Int);valeurDeMax(Int);multiplicateurCritique(Int);activationCritique(Int)
+typeEpeeLongue;1;8;2;20
+typeEpeeCourte;1;6;2;18
+typeDague;1;4;3;15
+typeLance;1;6;3;18
+typeMarteau;1;8;2;20

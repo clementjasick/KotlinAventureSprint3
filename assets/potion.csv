@@ -1,4 +1,3 @@
-nom;description;quantitéSoin
-potion De Soin;Restaure les points de vie;20
-grande potion De Soin;Restaure les points de vie;30
-
+nom(String);description(String);soin(Int)
+Potion de Soin;Restaure les points de vie;20
+Grande Potion de Soin;Restaure les points de vie;30

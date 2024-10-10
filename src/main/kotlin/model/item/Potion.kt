@@ -14,6 +14,7 @@ class Potion(
     description: String,
     val soin: Int
 ) : Item(nom, description) {
+    var id: Int?=null
 
     /**
      * Utilise la potion pour soigner un personnage en appelant la méthode boirePotion sur la cible.

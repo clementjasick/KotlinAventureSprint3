@@ -7,4 +7,5 @@ package model.item
  * @property bonusType Le bonus offert par cette armure en fonction de son type.
  */
 class TypeArmure(val nom: String, val bonusType: Int) {
+    var id: Int?=null
 }

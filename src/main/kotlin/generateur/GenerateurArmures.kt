@@ -1,9 +1,11 @@
 package generateur
 
+import model.item.Arme
 import model.item.Armure
-import typeArmures
 import qualites
+import qualitesFromCSV
 import typeArmes
+import typeArmures
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -19,7 +21,10 @@ class GenerateurArmures(val cheminFichier: String) {
         for (i in 1..listeObjCSV.lastIndex) {
             val ligneObjet = listeObjCSV[i].split(";")
             val cle = ligneObjet[0].lowercase()
-            val objet = Armure(nom = ligneObjet[0], description = ligneObjet[1], typeArmure = typeArmures[ligneObjet[2]]!!, qualite = qualites[ligneObjet[3]]!! )
+            val objet = Armure( nom = ligneObjet[0],
+                description = ligneObjet[1],
+                typeArmure = typeArmures[ligneObjet[2].lowercase()]!!,
+                qualite = qualitesFromCSV[ligneObjet[3].lowercase()]!!)
             mapObjets[cle] = objet
         }
         return mapObjets

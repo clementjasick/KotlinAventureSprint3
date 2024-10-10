@@ -16,5 +16,6 @@ class TypeArme(
     val multiplicateurCritique: Int,
     val activationCritique: Int
 ) {
+    var id: Int?=null
 
 }

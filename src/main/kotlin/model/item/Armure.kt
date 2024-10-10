@@ -12,6 +12,9 @@ import model.personnage.Personnage
  */
 class Armure(nom: String, description: String, val typeArmure: TypeArmure, val qualite: Qualite) :
     Item(nom, description) {
+    var id: Int?=null
+
+
     /**
      * Équipe l'armure sur un personnage, permettant au personnage d'augmenter sa défense.
      *

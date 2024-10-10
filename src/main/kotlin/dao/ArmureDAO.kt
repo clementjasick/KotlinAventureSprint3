@@ -1,0 +1,4 @@
+package dao
+
+class ArmureDAO {
+}

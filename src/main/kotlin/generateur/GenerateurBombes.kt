@@ -1,13 +1,17 @@
 package generateur
 
+import model.item.Arme
+import model.item.Bombe
 import model.item.Potion
-import model.item.Qualite
+import qualites
+import qualitesFromCSV
+import typeArmes
 import java.nio.file.Files
 import java.nio.file.Paths
 
-class GenerateurPotion(val cheminFichier: String) {
-    fun generer(): MutableMap<String, Potion> {
-        val mapObjets = mutableMapOf<String, Potion>()
+class GenerateurBombes(val cheminFichier: String) {
+    fun generer(): MutableMap<String, Bombe> {
+        val mapObjets = mutableMapOf<String, Bombe>()
 
         // Lecture du fichier CSV, le contenu du fichier est stocké dans une liste mutable :
         val cheminCSV = Paths.get(this.cheminFichier)
@@ -17,10 +21,13 @@ class GenerateurPotion(val cheminFichier: String) {
         for (i in 1..listeObjCSV.lastIndex) {
             val ligneObjet = listeObjCSV[i].split(";")
             val cle = ligneObjet[0].lowercase()
-            val objet = Potion(nom = ligneObjet[0], description = ligneObjet[1], soin = ligneObjet[3].toInt())
+            val objet = Bombe(  nom = ligneObjet[0],
+                description = ligneObjet[1],
+                nombreDeDes = ligneObjet[2].toInt(),
+                maxDe = ligneObjet[3].toInt()
+            )
             mapObjets[cle] = objet
         }
         return mapObjets
     }
 }
-

@@ -1,14 +1,13 @@
 package generateur
+
 import model.item.Arme
-import model.item.Qualite
-import model.item.TypeArme
 import qualites
+import qualitesFromCSV
 import typeArmes
-import java.nio.file.Paths
 import java.nio.file.Files
+import java.nio.file.Paths
 
 class GenerateurArmes(val cheminFichier: String) {
-
     fun generer(): MutableMap<String, Arme> {
         val mapObjets = mutableMapOf<String, Arme>()
 
@@ -20,12 +19,12 @@ class GenerateurArmes(val cheminFichier: String) {
         for (i in 1..listeObjCSV.lastIndex) {
             val ligneObjet = listeObjCSV[i].split(";")
             val cle = ligneObjet[0].lowercase()
-            val objet = Arme(nom = ligneObjet[0], description = ligneObjet[1], type = typeArmes[ligneObjet[2]]!!, qualite = qualites[ligneObjet[3]]!! )
+            val objet = Arme(   nom = ligneObjet[0],
+                description = ligneObjet[1],
+                type = typeArmes[ligneObjet[2].lowercase()]!!,
+                qualite = qualitesFromCSV[ligneObjet[3].lowercase()]!!)
             mapObjets[cle] = objet
         }
         return mapObjets
     }
 }
-
-
-

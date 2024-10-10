@@ -17,6 +17,7 @@ class Arme(
     val type: TypeArme,
     val qualite: Qualite
 ) : Item(nom, description) {
+    var id: Int?=null
     /**
      * Calcule les dégâts infligés par l'arme en fonction de son type et de sa qualité.
      * Les dégâts peuvent inclure des coups critiques et des bonus de qualité.

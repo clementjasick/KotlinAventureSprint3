@@ -1,4 +1,4 @@
-nom;pointDeVie;pointDeVieMax;attaque;defense;endurance;vitesse;armeEquipee;armureEquipee;inventaire
-Marvin le Kobold;25;25;3;4;6;12;dague;;potionDeSoin2,dague
-Antoine le gobelin;20;20;5;4;11;epee;;potionDeSoin3,epee
-Nassim le troll;100;100;6;3;12;3;marteau;;potionDeSoin4,marteau
+nom(String);pdv(Int);pdvMax(Int);attaque(Int);defense(Int);endurance(Int);vitesse(Int);armeEquipee(Arme?);armureEquipee(Armure);inventaire(MutableList<Item>)
+Marvin le Kobold;25;25;3;4;6;12;armes["dague"];null;potion de soin,dague
+Antoine le gobelin;20;20;5;4;11;6;épée courte;null;potion de soin,épée courte
+Nassim le troll;100;100;6;3;12;3;marteau;null;grande potion de soin,marteau

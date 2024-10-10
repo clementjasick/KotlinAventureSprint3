@@ -1,2 +1,2 @@
-nom;description;type;qualite
-Armure magique;Une armure magique;typeArmureCuir;!!
+nom(String);description(String);typeArmure(TypeArmure);qualite(Qualite)
+Armure magique;Une armure magique;Armure en cuir;commun

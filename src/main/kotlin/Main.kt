@@ -5,45 +5,38 @@ import model.jeu.TirageDes
 import model.item.*
 import model.personnage.Personnage
 import dao.QualiteDAO
-import generateur.GenerateurQualites
-import generateur.GenerateurTypeArmes
-import generateur.GenerateurArmes
-import generateur.GenerateurArmures
-import generateur.GenerateurBombe
-import generateur.GenerateurPotion
-import generateur.GenerateurTypeArmures
+import dao.TypeArmeDAO
+import dao.TypeArmureDAO
+import generateur.*
 
 //DEMO MISSION 1
 val generateurQualites = GenerateurQualites("assets/qualites.csv")
-val qualites = generateurQualites.generer()
+val qualitesFromCSV = generateurQualites.generer()
 
-val generateurTypeArmes = GenerateurTypeArmes("assets/typeArmes.csv")
-val typeArmes = generateurTypeArmes.generer()
+val typeArmes = GenerateurTypeArmes("assets/typeArmes.csv").generer()
+val armes = GenerateurArmes("assets/armes.csv").generer()
 
-val generateurArmes = GenerateurArmes("assets/armes.csv")
-val armes = generateurArmes.generer()
+val typeArmures = GenerateurTypeArmures("assets/typeArmures.csv").generer()
+val armures = GenerateurArmures("assets/armures.csv").generer()
 
-val generateurTypeArmures = GenerateurTypeArmures("assets/typeArmures.csv")
-val typeArmures = generateurTypeArmures.generer()
+val potions = GenerateurPotions("assets/potions.csv").generer()
+val bombes = GenerateurBombes("assets/bombes.csv").generer()
 
-val generateurArmures = GenerateurArmures("assets/armure.csv")
-val armures = generateurArmures.generer()
+val monstres = GenerateurMonstres("assets/monstres.csv").generer()
 
-val generateurPotion = GenerateurPotion("assets/potion.csv")
-val potion = generateurPotion.generer()
 
-val generateurBombe = GenerateurBombe("assets/bombe.csv")
-val bombes = generateurBombe.generer()
 //DEMO MISSION 2 :
-// TODO Retirer les commentaires des lignes 21 et 24
+// TODO Retirer les commentaires des lignes 22 et 25
 // TODO : A la ligne 13 renomé la variable qualites en qualitesFromCSV
 //instanciation de la co à la BDD
 val coBDD = BDD()
 //instanciation d'un objet QualiteDAO
-//val qualiteRepository = QualiteDAO(coBDD)
+val qualiteRepository = QualiteDAO(coBDD)
+val typeArmeRepository = TypeArmeDAO(coBDD)
+val typeArmureRepository = TypeArmureDAO(coBDD)
 //
 //Sauvegarde des Qualites dans la BDD
-//val qualites=qualiteRepository.saveAll(qualitesFromCSV.values)
+val qualites = qualiteRepository.saveAll(qualitesFromCSV.values)
 
 
 // instanciation des Sorts (pour le(s) mage(s))
@@ -93,15 +86,14 @@ val projectionAcide = Sort("Sort de projection acide", { caster, cible ->
 })
 
 //instanciation des types d'armes
-val typeEpeeLongue = TypeArme("Epee longue", 1, 8, 2, 20)
-val typeEpeeCourte = TypeArme("Epee courte", 1, 6, 2, 18)
-val typeDague = TypeArme("Epee courte", 1, 4, 3, 15)
-val typeLance = TypeArme("Lance", 1, 6, 3, 18)
-val typeMarteau = TypeArme("Marteau", 1, 8, 2, 20)
+//val typeEpeeLongue = TypeArme("Epee longue", 1, 8, 2, 20)
+//val typeEpeeCourte = TypeArme("Epee courte", 1, 6, 2, 18)
+//val typeDague = TypeArme("Epee courte", 1, 4, 3, 15)
+//val typeLance = TypeArme("Lance", 1, 6, 3, 18)
+//val typeMarteau = TypeArme("Marteau", 1, 8, 2, 20)
 
 //instanciation des types d'armures
-val typeArmureCuir = TypeArmure("Armure en cuir", 1)
-
+//val typeArmureCuir = typeArmures["armure en cuir"]  //TypeArmure("Armure en cuir", 1)
 
 val sortInvocatinArme = Sort("Sort d'invocation d'arme magique") { caster, cible ->
     run {
@@ -113,7 +105,7 @@ val sortInvocatinArme = Sort("Sort d'invocation d'arme magique") { caster, cible
             resultat <= 20 -> qualites["legendaire"]
             else -> qualites["commun"]
         }
-        val armeMagique = Arme("Epee magique", "Une arme magique", typeEpeeLongue, qualite!!)
+        val armeMagique = Arme("Epee magique", "Une arme magique", typeArmes["typeEpeeLongue"]!!, qualite!!)
 
         cible.inventaire.add(armeMagique)
         println("${armeMagique} est ajouté a l'inventaire de ${cible.nom}")
@@ -131,7 +123,7 @@ val sortInvocatinArmure = Sort("Sort d'invocation d'armure magique") { caster, c
             resultat <= 20 -> qualites["legendaire"]
             else -> qualites["commun"]
         }
-        val armureMagique = Armure("Armure magique", "Une armure magique", typeArmureCuir, qualite!!)
+        val armureMagique = Armure("Armure magique", "Une armure magique", typeArmures["armure en cuir"]!!, qualite!!)
 
         cible.inventaire.add(armureMagique)
         println("${armureMagique} est ajouté a l'inventaire de ${cible.nom}")
@@ -142,21 +134,25 @@ val sortInvocatinArmure = Sort("Sort d'invocation d'armure magique") { caster, c
 
 fun main() {
     //instanciation des armes des monstres
-    val epee = Arme("Épée Courte", "Une épée courte tranchante", typeEpeeCourte, qualites["commun"]!!)
-    val lance = Arme("Lance", "Une lance pointue", typeLance, qualites["rare"]!!)
-    val dague = Arme("Dague", "Une dague extrêmement pointue", typeDague, qualites["epic"]!!)
-    val marteau = Arme("Marteau", "un marteau legendaire pourfendeur de troll", typeMarteau, qualites["legendaire"]!!)
+    //val epee = armes["épée courte"]
+    //val epee = Arme("Épée Courte", "Une épée courte tranchante", typeEpeeCourte, qualites["commun"]!!)
+    //val lance = armes["lance"]
+    //val lance = Arme("Lance", "Une lance pointue", typeLance, qualites["rare"]!!)
+    //val dague = armes["dague"]
+    //val dague = Arme("Dague", "Une dague extrêmement pointue", typeDague, qualites["epic"]!!)
+    //val marteau = armes["marteau"]
+    //val marteau = Arme("Marteau", "un marteau legendaire pourfendeur de troll", typeMarteau, qualites["legendaire"]!!)
 
     // instanciation des potions et bombes des monstres
-    val potionDeSoin1 = Potion("Potion de Soin", "Restaure les points de vie", 20)
-    val potionDeSoin2 = Potion("Potion de Soin", "Restaure les points de vie", 20)
-    val potionDeSoin3 = Potion("Potion de Soin", "Restaure les points de vie", 20)
-    val potionDeSoin4 = Potion("Grande Potion de Soin", "Restaure les points de vie", 30)
-    val bombe = Bombe("Bombe","Ca fait BOOM",2,10)
+    //val potionDeSoin1 = Potion("Potion de Soin", "Restaure les points de vie", 20)
+    //val potionDeSoin2 = Potion("Potion de Soin", "Restaure les points de vie", 20)
+    //val potionDeSoin3 = Potion("Potion de Soin", "Restaure les points de vie", 20)
+    //val potionDeSoin4 = Potion("Grande Potion de Soin", "Restaure les points de vie", 30)
 
     // Instanciation des Monstres
+    /*
     val kobold =
-        Personnage("Marvin le Kobold", 25, 25, 3, 4, 6, 12, dague, inventaire = mutableListOf(potionDeSoin2, dague))
+        Personnage("Marvin le Kobold", 25, 25, 3, 4, 6, 12, armes["dague"], inventaire = mutableListOf(potionDeSoin2, armes["dague"]!!))
     val gobelin = Personnage(
         "Antoine le gobelin",
         pointDeVie = 20,
@@ -165,8 +161,8 @@ fun main() {
         defense = 4,
         vitesse = 11,
         endurance = 6,
-        armeEquipee = epee,
-        inventaire = mutableListOf(potionDeSoin3, epee)
+        armeEquipee = armes["épée courte"],
+        inventaire = mutableListOf(potionDeSoin3, armes["épée courte"]!!)
     )
     val troll = Personnage(
         "Nassim le troll",
@@ -176,11 +172,13 @@ fun main() {
         3,
         12,
         3,
-        marteau,
-        inventaire = mutableListOf(potionDeSoin4, marteau)
+        armes["marteau"],
+        inventaire = mutableListOf(potionDeSoin4, armes["marteau"]!!)
     )
+*/
 
-    val jeu = Jeu(listOf(kobold, gobelin, troll))
+    //val jeu = Jeu(listOf(kobold, gobelin, troll))
+    val jeu = Jeu(monstres = monstres.values.toList())
 
     jeu.lancerCombat()
 
